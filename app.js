@@ -85,11 +85,23 @@ const STORE = {
 
 // These functions return HTML templates
 
-function startScreen() {
-  // this function should simply return the start page HTML to the DOM
+function generateStart() {
+  // this function should simply return/generate the start page HTML to the DOM
+  // backticks contain start screen HTML from wireframe
+  return `<section class="start-screen">
+    <h2>Start Screen Wireframe</h2>
+    <div>
+        <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+    </div>
+    <div>
+        <h2>Are You A True Frank Ocean Fan? Take This Quiz to Find Out.</h2>
+        <p>This quiz features questions about Frank Ocean as a person and an artist.</p>
+        <button class="start" name="start" type="button">Start Quiz</button>
+    </div>
+    </section>`;
 }
 
-function showQuestion() {
+function generateQuestion() {
   // this function should trigger when the user clicks the start quiz button and it goes to the first question
   // function needs to access question from the store variable
   // function needs to access answers from the store variable
@@ -117,6 +129,19 @@ function finalScreen() {
   // when question of last question === total numbers of questions (.length)
   // if true return the final screen HTML to the DOM
   // else generate next question and return the HTML to the DOM
+  return `<section class="score-screen">
+    <h2>Final Score Screen Wireframe</h2>
+    <div>
+        <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+    </div>
+    <div>
+        <h2 class="final-score">You answered 7 questions correct out of 9!</h2>
+        <h3>If you did well, you earned the right to call yourself a true Frank Ocean fan.</h3>
+        <h3>If you didn't do so well, don't fret. Frank is an elusive character.</h3>
+        <button class="quit" name="quit" type="button">Quit</button>
+        <button class="try-again" name="try-again" type="button">Try Again</button>
+    </div>
+  </section>`;
 }
 
 /********** RENDER FUNCTION(S) **********/
@@ -125,20 +150,26 @@ function finalScreen() {
 
 function renderStartScreen() {
   // this function will render the start screen depending on if the quiz === true or false
+  // create an empty string to hold the HTML generation
+  let html = "";
   // if quiz started === false then render the homepage / call the start screen function
+  if ((store.quizStarted = false)) {
+    html = generateStart();
+    console.log(htlm);
+  }
   // if quiz started === true then render the question screen/ call the question screen function
+  else {
+    html = "question html here";
+  }
+  //display manipulate the DOM to add the HTML stored in the HTML variable
+  $("main").html(html);
+
   // this should initially render the start screen, no questions
 }
 
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
-
-function main() {
-  // this is the main function for the page that will fire when the page loads
-  // renderStartScreen();
-  // handleStartQuiz();
-}
 
 function handleStartQuiz() {
   // this function should trigger when then the start quiz button is clicked. once clicked it should move user to the question
@@ -153,3 +184,11 @@ function tryAgain() {
   // change the start quiz variable to false
   // render the start screen HTML
 }
+
+function main() {
+  // this is the main function for the page that will fire when the page loads
+  // renderStartScreen();
+  renderStartScreen();
+  // handleStartQuiz();
+}
+$(main);
