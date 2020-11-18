@@ -18,12 +18,229 @@
 </head>
 
 <body>
+    <main>
+        <!-- This is the wireframe for the start quiz screen. -->
+        <section class="start-screen">
+            <h2>Start Screen Wireframe</h2>
+            <div>
+                <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+            </div>
+            <div>
+                <h2>Are You A True Frank Ocean Fan? Take This Quiz to Find Out.</h2>
+                <p>This quiz features questions about Frank Ocean as a person and an artist.</p>
+                <button class="start" name="start" type="button">Start Quiz</button>
+            </div>
+        </section>
 
-    <header>
-        <h1>The name of your quiz</h1>
-    </header>
+        <!-- This is the wireframe for the question screen. -->
+        <section class="question-screen">
+            <h2>Question Screen Wireframe</h2>
+            <div>
+                <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+            </div>
+            <div class="question">
+                <h2>Question #1</h2>
+                <h4 class="progress">1 out of 9</h4>
+                <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+                    <label for="question-1">
+                        <h3>Where was Frank Ocean born?</h3>
+                    </label>
+                    <input id="question-1" name="response" type="radio"
+                           value="" /> Toronto, Canada</br>
+                    <input id="question-1" name="response" type="radio"
+                           value="" /> Chicago, Illinois</br>
+                    <input id="question-1" name="response" type="radio"
+                           value="" /> New Orleans, Louisiana</br>
+                    <input id="question-1" name="response" type="radio"
+                           value="" /> Atlanta, Georgia</br>
+                    <button class="submit" name="submit" type="button">Submit</button>
+                </form>
+                <!-- This will update on each view based on what the user selects throughout the quiz. -->
+                <h4 class="score">0 correct | incorrect 0</h4>
 
-    <main></main>
+            </div>
+        </section>
+
+        <!-- This is the wireframe for the correct answer screen. -->
+        <section class="correct-screen">
+            <h2>Correct Answer Screen Wireframe</h2>
+            <div>
+                <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+            </div>
+            <div>
+                <h2>You know your stuff!</h2>
+                <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+                    <label for="correct-1">
+                        <h3>Where was Frank Ocean born?</h3>
+                    </label>
+                    <div class="incorrect">
+                        <input id="correct-1" name="corect" type="radio"
+                               value="" /> Toronto, Canada</br>
+                    </div>
+                    <div class="incorrect">
+                        <input id="correct-1" name="corect" type="radio"
+                               value="" /> Chicago, Illinois</br>
+                    </div>
+                    <div class="correct selected-answer">
+                        <input id="correct-1" name="corect" checked type="radio"
+                               value="" /> New Orleans, Louisiana</br>
+                    </div>
+                    <div class="incorrect">
+                        <input id="correct-1" name="corect" type="radio"
+                               value="" /> Atlanta, Georgia</br>
+                    </div>
+                    <button class="submit" name="submit" type="button">Next</button>
+                </form>
+                <h4 class="score">1 correct | incorrect 0</h4>
+            </div>
+        </section>
+
+        <!-- This is the wireframe for the incorrect answer screen. -->
+        <section class="incorrect-screen">
+            <h2>Incorrect Answer Screen Wireframe</h2>
+            <div>
+                <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg"
+                     alt="">
+            </div>
+            <div>
+                <h2>Uh oh! That's not right.</h2>
+                <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+                    <label for="incorrect-2">
+                        <h3>Where was Frank Ocean born?</h3>
+                    </label>
+                    <div class="incorrect">
+                        <input id="incorrect-2" name="incorect" type="radio"
+                               value="" /> Toronto, Canada</br>
+                    </div>
+                    <div class="incorrect selected-answer">
+                        <input id="incorrect-2" name="incorect" checked type="radio"
+                               value="" /> Chicago, Illinois</br>
+                    </div>
+                    <div class="correct">
+                        <input id="incorrect-2" name="incorect" type="radio"
+                               value="" /> New Orleans, Louisiana</br>
+                    </div>
+                    <div class="incorrect">
+                        <input id="incorrect-2" name="incorect" type="radio"
+                               value="" /> Atlanta, Georgia</br>
+                    </div>
+                    <button class="submit" name="submit" type="button">Next</button>
+                </form>
+                <h4 class="score">0 correct | incorrect 1</h4>
+            </div>
+        </section>
+
+        <!-- This is the wireframe for the question screen. This is added to show the question number on the screen updating (e.g "1 out of 10" -> "2 out of 10"). -->
+        <section class="question-screen">
+            <h2>Next Question Screen Wireframe</h2>
+            <div>
+                <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+            </div>
+            <div class="question">
+                <h2>Question #2</h2>
+                <h4>2 out of 9</h4>
+                <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+                    <label for="question-2">
+                        <h3>What is Frank's zodiac sign?</h3>
+                    </label>
+                    <input id="question-2" name="response" type="radio"
+                           value="" /> Pisces</br>
+                    <input id="question-2" name="response" type="radio"
+                           value="" /> Sagitarrius</br>
+                    <input id="question-2" name="response" type="radio"
+                           value="" /> Cancer</br>
+                    <input id="question-2" name="response" type="radio"
+                           value="" /> Scorpio</br>
+                    <button class="submit" name="submit" type="button">Submit</button>
+                </form>
+                <h4 class="score">1 correct | incorrect 0</h4>
+            </div>
+        </section>
+
+        <!-- This is the wireframe for the correct answer screen. You can see the that question number information updates.-->
+        <section class="correct-screen">
+            <h2>Correct Answer Screen Wireframe</h2>
+            <div>
+                <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+            </div>
+            <div>
+                <h2>You know your stuff!</h2>
+                <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+                    <label for="correct-2">
+                        <h3>What is Frank's zodiac sign?</h3>
+                    </label>
+                    <div class="incorrect">
+                        <input id="correct-2" name="corect" type="radio"
+                               value="" /> Pisces</br>
+                    </div>
+                    <div class="incorrect">
+                        <input id="correct-2" name="corect" type="radio"
+                               value="" /> Sagitarrius</br>
+                    </div>
+                    <div class="incorrect">
+                        <input id="correct-2" name="corect" type="radio"
+                               value="" /> Cancer</br>
+                    </div>
+                    <div class="correct selected-answer">
+                        <input id="correct-2" name="corect" checked type="radio"
+                               value="" /> Scorpio</br>
+                    </div>
+                    <button class="submit" name="submit" type="button">Next</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- This is the wireframe for the incorrect answer screen. You can see the that question number information updates.-->
+        <section class="incorrect-screen">
+            <h2>Incorrect Answer Screen Wireframe</h2>
+            <div>
+                <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+            </div>
+            <div>
+                <h2>Uh oh! That's not right.</h2>
+                <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+                    <label for="incorrect-2">
+                        <h3>What is Frank's zodiac sign?</h3>
+                    </label>
+                    <div class="incorrect selected-answer">
+                        <input id="incorrect-2" name="incorect" checked type="radio"
+                               value="" /> Pisces</br>
+                    </div>
+                    <div class="incorrect">
+                        <input id="incorrect-2" name="incorect" type="radio"
+                               value="" /> Sagitarrius</br>
+                    </div>
+                    <div class="incorrect">
+                        <input id="incorrect-2" name="incorect" type="radio"
+                               value="" /> Cancer</br>
+                    </div>
+                    <div class="correct">
+                        <input id="incorrect-2" name="incorect" type="radio"
+                               value="" /> Scorpio</br>
+                    </div>
+                    <button class="submit" name="submit" type="button">Next</button>
+                </form>
+                <h4 class="score">1 correct | incorrect 1</h4>
+            </div>
+        </section>
+
+        <!-- This is the wireframe for the final score screen. -->
+        <section class="score-screen">
+            <h2>Final Score Screen Wireframe</h2>
+            <div>
+                <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+            </div>
+            <div>
+                <h2 class="final-score">You answered 7 questions correct out of 9!</h2>
+                <h3>If you did well, you earned the right to call yourself a true Frank Ocean fan.</h3>
+                <h3>If you didn't do so well, don't fret. Frank is an elusive character.</h3>
+                <button class="quit" name="quit" type="button">Quit</button>
+                <button class="try-again" name="try-again" type="button">Try Again</button>
+            </div>
+        </section>
+
+
+    </main>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.js" crossorigin="anonymous"></script>
     <!-- Link to Bootsrap if necessary -->

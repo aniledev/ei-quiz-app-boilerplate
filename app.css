@@ -6,3 +6,54 @@
   * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
   *
 */
+body {
+  width: 75%;
+  margin: auto;
+}
+
+section {
+  border: 3px solid lightgray;
+  margin-bottom: 20px;
+
+
+}
+
+img {
+  margin-top: 20px;
+  width: 100%;
+}
+
+
+}
+
+
+
+form {
+  /* display: flex;
+  flex-direction: column; */
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+div .correct {
+  background-color: lightgreen;
+}
+
+div .incorrect.selected-answer {
+  background-color: salmon;
+}
+
+button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+@media screen and (min-width: 600px) {
+  body {
+    width: 50%;
+  }
+
+}
