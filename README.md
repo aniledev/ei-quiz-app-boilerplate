@@ -1,6 +1,6 @@
 ### Boilerplate app structure for Quiz App project
 
-User Stories
+### User Stories
 
 **Starting Screen**
 - The app should have a starting screen.
@@ -20,5 +20,6 @@ User Stories
 - When a user submits an answer, they should be moved on to the next question or interact with an element to move on.
 - At the end of the quiz, user should be shown their overall score at the end of the quiz.
 - User should be able to start a new quiz at the end of the quiz.
+
 
 Image Source: https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg
