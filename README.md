@@ -1,4 +1,4 @@
-### Boilerplate app structure for Quiz App project
+## Boilerplate app structure for Quiz App project
 
 ### User Stories
 
