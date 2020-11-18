@@ -1,18 +1,64 @@
 /**
  * Example store structure
  */
-const store = {
+const STORE = {
   // 5 or more questions are required
   questions: [
     {
-      question: "What color is broccoli?",
-      answers: ["red", "orange", "pink", "green"],
-      correctAnswer: "green",
+      question: "Where was Frank Ocean born?",
+      answers: [
+        "Toronto, Canada",
+        "Chicago, Illinois",
+        "New Orleans, Louisiana",
+        "Atlanta, Georgia",
+      ],
+      correctAnswer: "New Orleans, Louisiana",
     },
     {
-      question: "What is the current year?",
-      answers: ["1970", "2015", "2019", "2005"],
-      correctAnswer: "2019",
+      question: "What is Frank's zodiac sign?",
+      answers: ["Pisces", "Sagitarrius", "Cancer", "Scorpio"],
+      correctAnswer: "Scorpio",
+    },
+    {
+      question: "What band collective is Frank Ocean associated with?",
+      answers: ["Odd Future", "Brockhampton", "The Free Nationals", "Migos"],
+      correctAnswer: "Odd Future",
+    },
+    {
+      question: "What song did he co-write with Beyonce?",
+      answers: ["Superpower", "Hold Up", "Sorry", "Diva"],
+      correctAnswer: "Superpower",
+    },
+    {
+      question: "What was Frank's childhood nickname?",
+      answers: ["Franky", "Lonny", "Richie", "Skinny"],
+      correctAnswer: "Lonny",
+    },
+    {
+      question: "What does the color orange remind Frank of?",
+      answers: [
+        "Living in his hometown",
+        "Losing his virginity",
+        "Hearing great music",
+        "Falling in love",
+      ],
+      correctAnswer: "Falling in love",
+    },
+    {
+      question:
+        "Which obsession does Frank Ocean lyrically reference numerous times throughout his recording career?",
+      answers: ["Foreign films", "Anime", "Sneakers", "Cars"],
+      correctAnswer: "Cars",
+    },
+    {
+      question: "What is the name of Frank Ocean's recording label?",
+      answers: ["Blonded", "G.O.O.D. Music", "Boys Don’t Cry", "Futura Free"],
+      correctAnswer: "Boys Don’t Cry",
+    },
+    {
+      question: "What is the name of the visual album Frank Ocean released?",
+      answers: ["Unlimited", "Endless", "Forever", "Infinity"],
+      correctAnswer: "Endless",
     },
   ],
   quizStarted: false,
