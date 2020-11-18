@@ -1,6 +1,6 @@
 # Boilerplate app structure for Quiz App project
 
-### User Stories
+## User Stories
 
 **Starting Screen**
 - The app should have a starting screen.
