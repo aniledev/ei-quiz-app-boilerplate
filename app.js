@@ -1,40 +1,76 @@
 /**
  * Example store structure
  */
-const store = {
+const STORE = {
   // 5 or more questions are required
   questions: [
     {
-      question: 'What color is broccoli?',
+      question: "Where was Frank Ocean born?",
       answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
+        "Toronto, Canada",
+        "Chicago, Illinois",
+        "New Orleans, Louisiana",
+        "Atlanta, Georgia",
       ],
-      correctAnswer: 'green'
+      correctAnswer: "New Orleans, Louisiana",
     },
     {
-      question: 'What is the current year?',
+      question: "What is Frank's zodiac sign?",
+      answers: ["Pisces", "Sagitarrius", "Cancer", "Scorpio"],
+      correctAnswer: "Scorpio",
+    },
+    {
+      question: "What band collective is Frank Ocean associated with?",
+      answers: ["Odd Future", "Brockhampton", "The Free Nationals", "Migos"],
+      correctAnswer: "Odd Future",
+    },
+    {
+      question: "What song did he co-write with Beyonce?",
+      answers: ["Superpower", "Hold Up", "Sorry", "Diva"],
+      correctAnswer: "Superpower",
+    },
+    {
+      question: "What was Frank's childhood nickname?",
+      answers: ["Franky", "Lonny", "Richie", "Skinny"],
+      correctAnswer: "Lonny",
+    },
+    {
+      question: "What does the color orange remind Frank of?",
       answers: [
-        '1970',
-        '2015',
-        '2019',
-        '2005'
+        "Living in his hometown",
+        "Losing his virginity",
+        "Hearing great music",
+        "Falling in love",
       ],
-      correctAnswer: '2019'
-    }
+      correctAnswer: "Falling in love",
+    },
+    {
+      question:
+        "Which obsession does Frank Ocean lyrically reference numerous times throughout his recording career?",
+      answers: ["Foreign films", "Anime", "Sneakers", "Cars"],
+      correctAnswer: "Cars",
+    },
+    {
+      question: "What is the name of Frank Ocean's recording label?",
+      answers: ["Blonded", "G.O.O.D. Music", "Boys Don’t Cry", "Futura Free"],
+      correctAnswer: "Boys Don’t Cry",
+    },
+    {
+      question: "What is the name of the visual album Frank Ocean released?",
+      answers: ["Unlimited", "Endless", "Forever", "Infinity"],
+      correctAnswer: "Endless",
+    },
   ],
   quizStarted: false,
   questionNumber: 0,
-  score: 0
+  score: 0,
 };
 
 /**
- * 
+ *
  * Technical requirements:
- * 
- * Your app should include a render() function, that regenerates the view each time the store is updated. 
+ *
+ * Your app should include a render() function, that regenerates the view each time the store is updated.
  * See your course material and access support for more details.
  *
  * NO additional HTML elements should be added to the index.html file.
@@ -42,7 +78,7 @@ const store = {
  * You may add attributes (classes, ids, etc) to the existing HTML elements, or link stylesheets or additional scripts if necessary
  *
  * SEE BELOW FOR THE CATEGORIES OF THE TYPES OF FUNCTIONS YOU WILL BE CREATING 👇
- * 
+ *
  */
 
 /********** TEMPLATE GENERATION FUNCTIONS **********/
