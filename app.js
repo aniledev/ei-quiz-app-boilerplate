@@ -89,7 +89,6 @@ function generateStart() {
   // this function should simply return/generate the start page HTML to the DOM
   // backticks contain start screen HTML from wireframe
   return `<section class="start-screen">
-    <h2>Start Screen Wireframe</h2>
     <div>
         <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
     </div>
@@ -106,6 +105,33 @@ function generateQuestion() {
   // function needs to access question from the store variable
   // function needs to access answers from the store variable
   // function needs to return question, answers, info and submit button HTML to the DOM
+  return `<section class="question-screen">
+  <h2>Question Screen Wireframe</h2>
+  <div>
+      <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+  </div>
+  <div class="question">
+      <h2>Question #1</h2>
+      <h4 class="progress">1 out of 9</h4>
+      <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+          <label for="question-1">
+              <h3>Where was Frank Ocean born?</h3>
+          </label>
+          <input id="question-1" name="response" type="radio"
+                 value="" /> Toronto, Canada</br>
+          <input id="question-1" name="response" type="radio"
+                 value="" /> Chicago, Illinois</br>
+          <input id="question-1" name="response" type="radio"
+                 value="" /> New Orleans, Louisiana</br>
+          <input id="question-1" name="response" type="radio"
+                 value="" /> Atlanta, Georgia</br>
+          <button class="submit" name="submit" type="button">Submit</button>
+      </form>
+      <!-- This will update on each view based on what the user selects throughout the quiz. -->
+      <h4 class="score">0 correct | incorrect 0</h4>
+
+  </div>
+</section>`;
 }
 
 function responseScreen() {
@@ -148,18 +174,17 @@ function finalScreen() {
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 
-function renderStartScreen() {
+function render() {
   // this function will render the start screen depending on if the quiz === true or false
   // create an empty string to hold the HTML generation
   let html = "";
   // if quiz started === false then render the homepage / call the start screen function
-  if ((store.quizStarted = false)) {
+  if (STORE.quizStarted === false) {
     html = generateStart();
-    console.log(htlm);
   }
   // if quiz started === true then render the question screen/ call the question screen function
   else {
-    html = "question html here";
+    html = generateQuestion();
   }
   //display manipulate the DOM to add the HTML stored in the HTML variable
   $("main").html(html);
@@ -174,8 +199,12 @@ function renderStartScreen() {
 function handleStartQuiz() {
   // this function should trigger when then the start quiz button is clicked. once clicked it should move user to the question
   // create a click event on the start button
-  // update the STORE variable for the start quiz === true
-  // trigger the render function for start screen
+  $("main").on("click", ".start-quiz", function (event) {
+    // update the STORE variable for the start quiz === true
+    store.quizStarted === true;
+    // trigger the render function for start screen and it should now display the question screen
+    render();
+  });
 }
 
 function tryAgain() {
@@ -187,8 +216,8 @@ function tryAgain() {
 
 function main() {
   // this is the main function for the page that will fire when the page loads
-  // renderStartScreen();
-  renderStartScreen();
-  // handleStartQuiz();
+  // render();
+  render();
+  handleStartQuiz();
 }
 $(main);
