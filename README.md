@@ -1,4 +1,4 @@
-## Boilerplate app structure for Quiz App project
+# Boilerplate app structure for Quiz App project
 
 ### User Stories
 
@@ -21,5 +21,5 @@
 - At the end of the quiz, user should be shown their overall score at the end of the quiz.
 - User should be able to start a new quiz at the end of the quiz.
 
-
+## Images
 Image Source: https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg
