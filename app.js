@@ -66,12 +66,12 @@ const STORE = {
   score: 0,
 };
 
-let number = STORE.questionNumber;
 let score = STORE.score;
-const question = STORE.questions[number].question;
-const answers = STORE.questions[number].answers;
-const correct = STORE.questions[number].correctAnswer;
-const answersInput = answers.map(function (answer, index) {
+let question = STORE.questions[STORE.questionNumber].question;
+let answers = STORE.questions[STORE.questionNumber].answers;
+let correct = STORE.questions[STORE.questionNumber].correctAnswer;
+
+let answersInput = answers.map(function (answer, index) {
   return `<input id="question-${index}" name="response" type="radio" 
   value="${answer}" /> ${answer}</br>`;
 });
@@ -111,6 +111,12 @@ function generateStart() {
 }
 
 function generateQuestion() {
+  let answers = STORE.questions[STORE.questionNumber].answers;
+  let correct = STORE.questions[STORE.questionNumber].correctAnswer;
+  let answersInput = answers.map(function (answer, index) {
+    return `<input id="question-${index}" name="response" type="radio" 
+    value="${answer}" /> ${answer}</br>`;
+  });
   // this function should trigger when the user clicks the start quiz button and it goes to the first question
   // function needs to access question from the store variable
   // function needs to access answers from the store variable
@@ -125,18 +131,20 @@ function generateQuestion() {
   </div>
   <div class="question">
   
-      <h4 class="progress">${number + 1} out of ${
+      <h4 class="progress">${STORE.questionNumber + 1} out of ${
     Object.keys(STORE.questions).length
   }</h4>
       <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
-          <label for="question-${number}">
-              <h3>${question}</h3>
+          <label for="question-${STORE.questionNumber}">
+              <h3>${STORE.questions[STORE.questionNumber].question}</h3>
           </label>
           ${answersInput.join("")}
           <button class="show-answer" name="show-answer" type="submit">Submit</button>
       </form>
       <!-- This will update on each view based on what the user selects throughout the quiz. -->
-      <h4 class="score">${score} correct out of ${number}</h4>
+      <h4 class="score">${STORE.score} correct out of ${
+    STORE.questionNumber
+  }</h4>
 
   </div>
 </section>`;
@@ -145,7 +153,11 @@ function generateQuestion() {
 function correctResponseScreen(score) {
   console.log("correct function running -- correct");
   // this function should trigger when the user clicks the submit button to see if they got the question right or wrong
-  const answersInput = answers.map(function (answer, index) {
+  // function neds to access question from store variable
+  let question = STORE.questions[STORE.questionNumber].question;
+  // function needs to acess answers from the store variable
+  let answers = STORE.questions[STORE.questionNumber].answers;
+  let answersInput = answers.map(function (answer, index) {
     return `<input id="question-${index}" name="response" type="radio" 
     value="${answer}" /> ${answer}</br>`;
   });
@@ -158,22 +170,29 @@ function correctResponseScreen(score) {
   <div>
       
       <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
-          <label for="response-${number}">
+          <label for="response-${STORE.questionNumber}">
               <h3>${question}</h3>
           </label>
           ${answersInput.join("")}
           <button class="next-question" name="next-question" type="submit">Next Question</button>
       </form>
       <!-- This will update on each view based on what the user selects throughout the quiz. -->
-      <h4 class="score">${score} correct out of ${number}</h4>
+      <h4 class="score">${score} correct out of ${STORE.questionNumber + 1}</h4>
       
   </div>
 </section>`;
 }
 
-function incorrectResponseScreen() {
+function incorrectResponseScreen(score) {
   console.log("correct function running -- incorrect");
   // this function should trigger when the user clicks the submit button to see if they got the question right or wrong
+  let question = STORE.questions[STORE.questionNumber].question;
+  // function needs to acess answers from the store variable
+  let answers = STORE.questions[STORE.questionNumber].answers;
+  let answersInput = answers.map(function (answer, index) {
+    return `<input id="question-${index}" name="response" type="radio" 
+    value="${answer}" /> ${answer}</br>`;
+  });
   return `<section class="incorrect-screen">
   <h2>Incorrect Answer Screen Wireframe</h2>
   <div>
@@ -184,14 +203,14 @@ function incorrectResponseScreen() {
       <h2>Uh oh! That's not right. And you call yourself a fan.</h2>
       <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
           <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
-          <label for="response-${number}">
+          <label for="response-${STORE.questionNumber}">
               <h3>${question}</h3>
           </label>
           ${answersInput.join("")}
           <button class="next-question" name="next-question" type="submit">Next Question</button>
       </form>
       <!-- This will update on each view based on what the user selects throughout the quiz. -->
-      <h4 class="score">${score} correct out of ${number}</h4>
+      <h4 class="score">${score} correct out of ${STORE.questionNumber + 1}</h4>
   </div>
 </section>`;
 }
@@ -207,9 +226,9 @@ function finalScreen() {
         <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
     </div>
     <div>
-        <h2 class="final-score">You answered ${score} questions correct out of ${
-    Object.keys(STORE.questions).length
-  }!</h2>
+        <h2 class="final-score">You answered ${
+          STORE.score
+        } questions correct out of ${Object.keys(STORE.questions).length}!</h2>
         <h3>If you did well, you earned the right to call yourself a true Frank Ocean fan.</h3>
         <h3>If you didn't do so well, don't fret. Frank is an elusive character.</h3>
         <button class="quit" name="quit" type="button">Quit</button>
@@ -229,6 +248,11 @@ function render() {
   // if quiz started === false then render the homepage / call the start screen function
   if (STORE.quizStarted === false) {
     html = generateStart();
+  } else if (
+    STORE.quizStarted === true &&
+    STORE.questionNumber === STORE.questions.length
+  ) {
+    html = finalScreen();
   }
   // if quiz started === true then render the question screen/ call the question screen function
   else {
@@ -259,18 +283,15 @@ function handleStartQuiz() {
 }
 
 function showAnswer() {
-  let score = STORE.score;
   // function needs to acess the value of the radio button they selected when the hit the submit button
   $("main").on("click", ".show-answer", function (event) {
     event.preventDefault();
     let selected = $("input[type=radio]:checked").val();
-    // create a variable to identify which question user is on
-    let number = STORE.questionNumber;
 
     // function neds to access question from store variable
-    let question = STORE.questions[number].question;
+    let question = STORE.questions[STORE.questionNumber].question;
     // function needs to acess answers from the store variable
-    let answer = STORE.questions[number].correctAnswer;
+    let answer = STORE.questions[STORE.questionNumber].correctAnswer;
 
     console.log(`user selected: ${selected}`);
     console.log(`correct answer is: ${answer}`);
@@ -278,18 +299,14 @@ function showAnswer() {
     if (selected == answer) {
       // if selected answer === correct answer return correct answer HTML to the dom
 
-      score += 1; // score++
-      console.log(`score: ${score}`);
-      number += 1;
-      console.log(`number: ${number}`);
-
-      html = correctResponseScreen(score);
+      STORE.score++; // score++
+      console.log(`score: ${STORE.score}`);
+      html = correctResponseScreen(STORE.score);
 
       // if seleced answer !== correct answer reutnr incorrect answer HTML to the dom
     } else {
-      number += 1;
-      console.log(`number: ${number}`);
-      html = incorrectResponseScreen(score);
+      console.log(`number: ${STORE.questionNumber}`);
+      html = incorrectResponseScreen(STORE.score);
     }
 
     $("main").html(html);
@@ -305,10 +322,9 @@ function nextQuestion() {
   $("main").on("click", ".next-question", function (event) {
     console.log("correct function running - next question");
     debugger;
-    html = generateQuestion(number);
-    console.log(`${number}`);
-
-    $("main").html(html);
+    STORE.questionNumber++;
+    console.log(`number: ${STORE.questionNumber}`);
+    render();
   });
 }
 
