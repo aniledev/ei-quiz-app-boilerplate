@@ -66,6 +66,14 @@ const STORE = {
   score: 0,
 };
 
+const number = STORE.questionNumber;
+const question = STORE.questions[number].question;
+const answers = STORE.questions[number].answers;
+const correct = STORE.questions[number].correctAnswer;
+const answersInput = answers.map(function (answer, index) {
+  return `<input id="question-${index}" name="response" type="radio" required
+  value="${answer}" /> ${answer}</br>`;
+});
 /**
  *
  * Technical requirements:
@@ -89,58 +97,100 @@ function generateStart() {
   // this function should simply return/generate the start page HTML to the DOM
   // backticks contain start screen HTML from wireframe
   return `<section class="start-screen">
-    <div>
-        <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
-    </div>
-    <div>
-        <h2>Are You A True Frank Ocean Fan? Take This Quiz to Find Out.</h2>
-        <p>This quiz features questions about Frank Ocean as a person and an artist.</p>
-        <button class="start" name="start" type="button">Start Quiz</button>
-    </div>
-    </section>`;
+  <h2>Start</h2>
+  <div>
+      <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+  </div>
+  <div>
+      <h2>Are You A True Frank Ocean Fan? Take This Quiz to Find Out.</h2>
+      <p>This quiz features questions about Frank Ocean as a person and an artist.</p>
+      <button class="start-quiz" name="start-quiz" type="submit">Start Quiz</button>
+  </div>
+  </section>`;
 }
 
 function generateQuestion() {
   // this function should trigger when the user clicks the start quiz button and it goes to the first question
   // function needs to access question from the store variable
   // function needs to access answers from the store variable
-  // function needs to return question, answers, info and submit button HTML to the DOM
+
+  // using the map function to apply html formating to each of the possible answer options
+
+  // returning the full html of our question and answer screen to the DOM
   return `<section class="question-screen">
-  <h2>Question Screen Wireframe</h2>
+  <h2>Wishing You Godspeed...</h2>
   <div>
       <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
   </div>
   <div class="question">
-      <h2>Question #1</h2>
-      <h4 class="progress">1 out of 9</h4>
+  
+      <h4 class="progress">${number + 1} out of ${
+    Object.keys(STORE.questions).length
+  }</h4>
       <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
-          <label for="question-1">
-              <h3>Where was Frank Ocean born?</h3>
+          <label for="question-${number}">
+              <h3>${question}</h3>
           </label>
-          <input id="question-1" name="response" type="radio"
-                 value="" /> Toronto, Canada</br>
-          <input id="question-1" name="response" type="radio"
-                 value="" /> Chicago, Illinois</br>
-          <input id="question-1" name="response" type="radio"
-                 value="" /> New Orleans, Louisiana</br>
-          <input id="question-1" name="response" type="radio"
-                 value="" /> Atlanta, Georgia</br>
-          <button class="submit" name="submit" type="button">Submit</button>
+          ${answersInput.join("")}
+          <button class="show-answer" name="show-answer" type="submit">Submit</button>
       </form>
       <!-- This will update on each view based on what the user selects throughout the quiz. -->
-      <h4 class="score">0 correct | incorrect 0</h4>
+      <h4 class="score">${STORE.score} correct out of ${number}</h4>
 
   </div>
 </section>`;
 }
 
-function responseScreen() {
+function correctResponseScreen() {
   // this function should trigger when the user clicks the submit button to see if they got the question right or wrong
-  // function neds to access question from store variable
-  // function needs to acess answers from the store variable
-  // function needs to check if selected answer = correct answer
-  // if selected answer === correct answer return correct answer HTML to the dom
-  // if seleced answer !== correct answer reutnr incorrect answer HTML to the dom
+  const answersInput = answers.map(function (answer, index) {
+    return `<input id="question-${index}" name="response" type="radio" required
+    value="${answer}" /> ${answer}</br>`;
+  });
+
+  return `<section class="correct-screen">
+  <h2>Correct Answer Screen Wireframe</h2>
+  <div>
+      <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+  </div>
+  <div>
+      <h2>You know your stuff!</h2>
+      <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+          <label for="response-${number}">
+              <h3>${question}</h3>
+          </label>
+          ${answersInput.join("")}
+          <button class="show-answer" name="show-answer" type="submit">Submit</button>
+      </form>
+      <!-- This will update on each view based on what the user selects throughout the quiz. -->
+      <h4 class="score">${STORE.score} correct out of ${number}</h4>
+      
+  </div>
+</section>`;
+}
+
+function incorrectResponseScreen() {
+  // this function should trigger when the user clicks the submit button to see if they got the question right or wrong
+  return `<section class="incorrect-screen">
+  <h2>Incorrect Answer Screen Wireframe</h2>
+  <div>
+      <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg"
+           alt="">
+  </div>
+  <div>
+      <h2>Uh oh! That's not right. And you call yourself a fan.</h2>
+      <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+          <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+          <label for="response-${number}">
+              <h3>${question}</h3>
+          </label>
+          ${answersInput.join("")}
+          <button class="show-answer" name="show-answer" type="submit">Submit</button>
+      </form>
+      <!-- This will update on each view based on what the user selects throughout the quiz. -->
+      <h4 class="score">${STORE.score} correct out of ${number}</h4>
+  </div>
+</section>`;
 }
 
 function nextQuestion() {
@@ -156,7 +206,7 @@ function finalScreen() {
   // if true return the final screen HTML to the DOM
   // else generate next question and return the HTML to the DOM
   return `<section class="score-screen">
-    <h2>Final Score Screen Wireframe</h2>
+  <h1>Frank Ocean Quiz</h1>
     <div>
         <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
     </div>
@@ -186,6 +236,7 @@ function render() {
   else {
     html = generateQuestion();
   }
+
   //display manipulate the DOM to add the HTML stored in the HTML variable
   $("main").html(html);
 
@@ -201,9 +252,39 @@ function handleStartQuiz() {
   // create a click event on the start button
   $("main").on("click", ".start-quiz", function (event) {
     // update the STORE variable for the start quiz === true
-    store.quizStarted === true;
+    event.preventDefault();
+    console.log("user clicked start button");
+    STORE.quizStarted = true;
     // trigger the render function for start screen and it should now display the question screen
     render();
+  });
+}
+
+function showAnswer() {
+  // function needs to acess the value of the radio button they selected when the hit the submit button
+  $("main").on("click", ".show-answer", function (event) {
+    event.preventDefault();
+    console.log("user clicked show answer");
+    // create a variable to identify which question user is on
+    let number = STORE.questionNumber;
+    // function neds to access question from store variable
+    let question = STORE.questions[number].question;
+    // function needs to acess answers from the store variable
+    let answer = STORE.questions[number].correctAnswer;
+    let selected = $("input[class='show-answer']:checked").val();
+    console.log(`user selected: ${selected}`);
+    console.log(`correct answer is: ${answer}`);
+    // function needs to check if selected answer = correct answer
+    if (selected === answer) {
+      // if selected answer === correct answer return correct answer HTML to the dom
+      html = correctResponseScreen();
+
+      // if seleced answer !== correct answer reutnr incorrect answer HTML to the dom
+    } else {
+      html = incorrectResponseScreen();
+    }
+
+    $("main").html(html);
   });
 }
 
@@ -216,8 +297,9 @@ function tryAgain() {
 
 function main() {
   // this is the main function for the page that will fire when the page loads
-  // render();
   render();
   handleStartQuiz();
+  showAnswer();
 }
+
 $(main);
