@@ -72,7 +72,7 @@ let answers = STORE.questions[STORE.questionNumber].answers;
 let correct = STORE.questions[STORE.questionNumber].correctAnswer;
 
 let answersInput = answers.map(function (answer, index) {
-  return `<input id="question-${index}" name="response" type="radio" 
+  return `<input required id="question-${index}" name="response" type="radio" 
   value="${answer}" /> ${answer}</br>`;
 });
 /**
@@ -94,13 +94,13 @@ let answersInput = answers.map(function (answer, index) {
 
 // These functions return HTML templates
 
-function generateStart() {
+function generateStartTemplate() {
   // this function should simply return/generate the start page HTML to the DOM
   // backticks contain start screen HTML from wireframe
   return `<section class="start-screen">
-  <h2>Start</h2>
+  <h2>Take the Frank Ocean Quiz!</h2>
   <div>
-      <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+      <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="Photograph of the singer/songwriter Frank Ocean singing into a microphone against a dark purple background">
   </div>
   <div>
       <h2>Are You A True Frank Ocean Fan? Take This Quiz to Find Out.</h2>
@@ -110,12 +110,12 @@ function generateStart() {
   </section>`;
 }
 
-function generateQuestion() {
+function generateQuestionTemplate() {
   let answers = STORE.questions[STORE.questionNumber].answers;
   let correct = STORE.questions[STORE.questionNumber].correctAnswer;
   let answersInput = answers.map(function (answer, index) {
-    return `<input id="question-${index}" name="response" type="radio" 
-    value="${answer}" /> ${answer}</br>`;
+    return `<input required id="question-${index}" name="response" type="radio" 
+    value="${answer}" required /> ${answer}</br>`;
   });
   // this function should trigger when the user clicks the start quiz button and it goes to the first question
   // function needs to access question from the store variable
@@ -127,7 +127,7 @@ function generateQuestion() {
   return `<section class="question-screen">
   <h2>Wishing You Godspeed...</h2>
   <div>
-      <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+      <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="Photograph of the singer/songwriter Frank Ocean singing into a microphone against a dark purple background">
   </div>
   <div class="question">
   
@@ -150,7 +150,7 @@ function generateQuestion() {
 </section>`;
 }
 
-function correctResponseScreen(score) {
+function correctResponseTemplate(score) {
   console.log("correct function running -- correct");
   // this function should trigger when the user clicks the submit button to see if they got the question right or wrong
   // function neds to access question from store variable
@@ -165,7 +165,7 @@ function correctResponseScreen(score) {
   return `<section class="correct-screen">
   <h2 id="response-header" class="response-header">You know your stuff! You're a true fan.</h2>
   <div>
-      <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+      <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="Photograph of the singer/songwriter Frank Ocean singing into a microphone against a dark purple background">
   </div>
   <div>
       
@@ -183,7 +183,7 @@ function correctResponseScreen(score) {
 </section>`;
 }
 
-function incorrectResponseScreen(score) {
+function incorrectResponseTemplate(score) {
   console.log("correct function running -- incorrect");
   // this function should trigger when the user clicks the submit button to see if they got the question right or wrong
   let question = STORE.questions[STORE.questionNumber].question;
@@ -197,13 +197,16 @@ function incorrectResponseScreen(score) {
   <h2 id="incorrect-repsonse-header " class="incorrect-repsonse-header">Uh oh! That's not right. And you call yourself a fan.</h2>
   <div>
       <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg"
-           alt="">
+           alt="Photograph of the singer/songwriter Frank Ocean singing into a microphone against a dark purple background">
   </div>
   <div>
       <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
           <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
           <label for="response-${STORE.questionNumber}">
               <h3>${question}</h3>
+              <h3 id="feedback" class="feedback">The correct answer is: ${
+                STORE.questions[STORE.questionNumber].correctAnswer
+              }</h3>
           </label>
           ${answersInput.join("")}
           <button class="next-question" name="next-question" type="submit">Next Question</button>
@@ -214,15 +217,15 @@ function incorrectResponseScreen(score) {
 </section>`;
 }
 
-function finalScreen() {
+function finalScreenTemplate() {
   // this function shoulld trigger when the user hits the next button on the final question
   // when question of last question === total numbers of questions (.length)
   // if true return the final screen HTML to the DOM
   // else generate next question and return the HTML to the DOM
   return `<section class="score-screen">
-  <h1>Frank Ocean Quiz</h1>
+  <h2>Here's how you did!</h2>
     <div>
-        <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
+        <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="Photograph of the singer/songwriter Frank Ocean singing into a microphone against a dark purple background">
     </div>
     <div>
         <h2 class="final-score">You answered ${
@@ -230,7 +233,6 @@ function finalScreen() {
         } questions correct out of ${Object.keys(STORE.questions).length}!</h2>
         <h3>If you did well, you earned the right to call yourself a true Frank Ocean fan.</h3>
         <h3>If you didn't do so well, don't fret. Frank is an elusive character.</h3>
-        <button class="quit" name="quit" type="button">Quit</button>
         <button class="try-again" name="try-again" type="button">Try Again</button>
     </div>
   </section>`;
@@ -246,16 +248,16 @@ function render() {
   let html = "";
   // if quiz started === false then render the homepage / call the start screen function
   if (STORE.quizStarted === false) {
-    html = generateStart();
+    html = generateStartTemplate();
   } else if (
     STORE.quizStarted === true &&
     STORE.questionNumber === STORE.questions.length
   ) {
-    html = finalScreen();
+    html = finalScreenTemplate();
   }
   // if quiz started === true then render the question screen/ call the question screen function
   else {
-    html = generateQuestion();
+    html = generateQuestionTemplate();
   }
 
   //display manipulate the DOM to add the HTML stored in the HTML variable
@@ -281,7 +283,7 @@ function handleStartQuiz() {
   });
 }
 
-function showAnswer() {
+function handleShowAnswer() {
   // function needs to acess the value of the radio button they selected when the hit the submit button
   $("main").on("click", ".show-answer", function (event) {
     event.preventDefault();
@@ -300,19 +302,19 @@ function showAnswer() {
 
       STORE.score++; // score++
       console.log(`score: ${STORE.score}`);
-      html = correctResponseScreen(STORE.score);
+      html = correctResponseTemplate(STORE.score);
 
       // if seleced answer !== correct answer reutnr incorrect answer HTML to the dom
     } else {
       console.log(`number: ${STORE.questionNumber}`);
-      html = incorrectResponseScreen(STORE.score);
+      html = incorrectResponseTemplate(STORE.score);
     }
 
     $("main").html(html);
   });
 }
 
-function nextQuestion() {
+function handleNextQuestion() {
   // this function should trigger when the user clicks the next button and the next question should load
   // this function needs to access the question from the STORE variable
   // the function needs to access teh answer from the STORE variable
@@ -326,7 +328,7 @@ function nextQuestion() {
   });
 }
 
-function tryAgain() {
+function handleTryAgain() {
   // this function should trigger when the user clicks the try again button and they should be directed to the start of the screen
   // create click event of try agian button
   $("main").on("click", ".try-again", function (event) {
@@ -353,9 +355,9 @@ function main() {
   // this is the main function for the page that will fire when the page loads
   render();
   handleStartQuiz();
-  showAnswer();
-  nextQuestion();
-  tryAgain();
+  handleShowAnswer();
+  handleNextQuestion();
+  handleTryAgain();
 }
 
 $(main);
