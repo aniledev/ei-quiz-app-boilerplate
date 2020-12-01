@@ -163,7 +163,7 @@ function correctResponseScreen(score) {
   });
 
   return `<section class="correct-screen">
-  <h2>You know your stuff! You're a true fan.</h2>
+  <h2 id="response-header" class="response-header">You know your stuff! You're a true fan.</h2>
   <div>
       <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg" alt="">
   </div>
@@ -194,13 +194,12 @@ function incorrectResponseScreen(score) {
     value="${answer}" /> ${answer}</br>`;
   });
   return `<section class="incorrect-screen">
-  <h2>Incorrect Answer Screen Wireframe</h2>
+  <h2 id="incorrect-repsonse-header " class="incorrect-repsonse-header">Uh oh! That's not right. And you call yourself a fan.</h2>
   <div>
       <img src="https://media.snl.no/media/135506/article_topimage_Frank_Ocean.jpg"
            alt="">
   </div>
   <div>
-      <h2>Uh oh! That's not right. And you call yourself a fan.</h2>
       <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
           <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
           <label for="response-${STORE.questionNumber}">
@@ -321,7 +320,6 @@ function nextQuestion() {
 
   $("main").on("click", ".next-question", function (event) {
     console.log("correct function running - next question");
-    debugger;
     STORE.questionNumber++;
     console.log(`number: ${STORE.questionNumber}`);
     render();
@@ -331,8 +329,24 @@ function nextQuestion() {
 function tryAgain() {
   // this function should trigger when the user clicks the try again button and they should be directed to the start of the screen
   // create click event of try agian button
-  // change the start quiz variable to false
-  // render the start screen HTML
+  $("main").on("click", ".try-again", function (event) {
+    event.preventDefault();
+    console.log("user clicked try again buton");
+    debugger;
+    STORE.quizStarted = false;
+    console.log(STORE.quizStarted);
+    STORE.questionNumber = 0;
+    console.log(STORE.questionNumber);
+    STORE.score = 0;
+    console.log(STORE.score);
+    render();
+  });
+  //console log that user clicked button
+  // revert quiz back to its initial state
+  // assign the start quiz variable to false
+  // assign the question number to 0
+  // assign the score to 0
+  // render the start screen HTML based on these new state conditions
 }
 
 function main() {
@@ -341,6 +355,7 @@ function main() {
   handleStartQuiz();
   showAnswer();
   nextQuestion();
+  tryAgain();
 }
 
 $(main);

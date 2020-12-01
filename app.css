@@ -39,6 +39,14 @@ button {
   margin-bottom: 20px;
 }
 
+h2.response-header {
+  color: lightgreen;
+}
+
+h2.incorrect-repsonse-header {
+  color: salmon;
+}
+
 @media screen and (min-width: 600px) {
   body {
     width: 50%;
