@@ -10,6 +10,7 @@
 body {
   width: 75%;
   margin: auto;
+  font-family: "Sarabun", sans-serif;
 }
 
 section {
@@ -62,6 +63,16 @@ button {
 .next-question {
   background-color: orange;
   color: black;
+}
+
+h2,
+h3,
+h4 {
+  font-style: italic;
+}
+
+h2 {
+  font-weight: 800;
 }
 
 h2.response-header {
