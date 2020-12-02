@@ -150,7 +150,6 @@ function generateQuestionTemplate() {
 }
 
 function correctResponseTemplate(score) {
-  console.log("correct function running -- correct");
   // this function should trigger when the user clicks the submit button to see if they got the question right or wrong
   // function neds to access question from store variable
   let question = STORE.questions[STORE.questionNumber].question;
@@ -183,7 +182,6 @@ function correctResponseTemplate(score) {
 }
 
 function incorrectResponseTemplate(score) {
-  console.log("correct function running -- incorrect");
   // this function should trigger when the user clicks the submit button to see if they got the question right or wrong
   let question = STORE.questions[STORE.questionNumber].question;
   // function needs to acess answers from the store variable
@@ -274,7 +272,7 @@ function handleStartQuiz() {
   $("main").on("click", ".start-quiz", function (event) {
     // update the STORE variable for the start quiz === true
     event.preventDefault();
-    console.log("user clicked start button");
+
     STORE.quizStarted = true;
     // trigger the render function for start screen and it should now display the question screen
     render();
@@ -285,7 +283,6 @@ function handleShowAnswer() {
   // function needs to acess the value of the radio button they selected when the hit the submit button
 
   $("main").on("submit", ".question-form", function (event) {
-    debugger;
     event.preventDefault();
     let selected = $("input[type=radio]:checked").val();
 
@@ -294,19 +291,15 @@ function handleShowAnswer() {
     // function needs to acess answers from the store variable
     let answer = STORE.questions[STORE.questionNumber].correctAnswer;
 
-    console.log(`user selected: ${selected}`);
-    console.log(`correct answer is: ${answer}`);
     // function needs to check if selected answer = correct answer
     if (selected == answer) {
       // if selected answer === correct answer return correct answer HTML to the dom
 
       STORE.score++; // score++
-      console.log(`score: ${STORE.score}`);
       html = correctResponseTemplate(STORE.score);
 
       // if seleced answer !== correct answer reutnr incorrect answer HTML to the dom
     } else {
-      console.log(`number: ${STORE.questionNumber}`);
       html = incorrectResponseTemplate(STORE.score);
     }
 
@@ -321,9 +314,7 @@ function handleNextQuestion() {
   // this function needs to increment the index of the question in the STORE variable and return the HTML to the dom
 
   $("main").on("click", ".next-question", function (event) {
-    console.log("correct function running - next question");
     STORE.questionNumber++;
-    console.log(`number: ${STORE.questionNumber}`);
     render();
   });
 }
@@ -333,13 +324,9 @@ function handleTryAgain() {
   // create click event of try agian button
   $("main").on("click", ".try-again", function (event) {
     event.preventDefault();
-    console.log("user clicked try again buton");
     STORE.quizStarted = false;
-    console.log(STORE.quizStarted);
     STORE.questionNumber = 0;
-    console.log(STORE.questionNumber);
     STORE.score = 0;
-    console.log(STORE.score);
     render();
   });
   //console log that user clicked button
