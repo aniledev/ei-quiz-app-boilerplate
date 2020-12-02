@@ -114,8 +114,10 @@ function generateQuestionTemplate() {
   let answers = STORE.questions[STORE.questionNumber].answers;
   let correct = STORE.questions[STORE.questionNumber].correctAnswer;
   let answersInput = answers.map(function (answer, index) {
-    return `<input id="question-${STORE.questionNumber}" name="response" type="radio" 
-    value="${answer}" required/><label for="question-${STORE.questionNumber}">${answer}</label> </br>`;
+    return `<label for="question-${answer}">
+      <input id="question-${answer}" name="response" type="radio" 
+    value="${answer}" required/>${answer}
+    </label> </br>`;
   });
   // this function should trigger when the user clicks the start quiz button and it goes to the first question
   // function needs to access question from the store variable
