@@ -72,8 +72,8 @@ let answers = STORE.questions[STORE.questionNumber].answers;
 let correct = STORE.questions[STORE.questionNumber].correctAnswer;
 
 let answersInput = answers.map(function (answer, index) {
-  return `<input required id="question-${index}" name="response" type="radio" 
-  value="${answer}" /> ${answer}</br>`;
+  return `<input id="question-${index}" name="response" type="radio" 
+  value="${answer}" required/> ${answer}</br>`;
 });
 /**
  *
@@ -114,8 +114,8 @@ function generateQuestionTemplate() {
   let answers = STORE.questions[STORE.questionNumber].answers;
   let correct = STORE.questions[STORE.questionNumber].correctAnswer;
   let answersInput = answers.map(function (answer, index) {
-    return `<input required id="question-${index}" name="response" type="radio" 
-    value="${answer}" required /> ${answer}</br>`;
+    return `<input id="question-${STORE.questionNumber}" name="response" type="radio" 
+    value="${answer}" required/><label for="question-${STORE.questionNumber}">${answer}</label> </br>`;
   });
   // this function should trigger when the user clicks the start quiz button and it goes to the first question
   // function needs to access question from the store variable
@@ -134,12 +134,11 @@ function generateQuestionTemplate() {
       <h4 class="progress">${STORE.questionNumber + 1} out of ${
     Object.keys(STORE.questions).length
   }</h4>
-      <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
-          <label for="question-${STORE.questionNumber}">
-              <h3>${STORE.questions[STORE.questionNumber].question}</h3>
-          </label>
+      <form class="question-form" accept-charset="UTF-8" autocomplete="on">
+      <h3>${STORE.questions[STORE.questionNumber].question}</h3>
+          
           ${answersInput.join("")}
-          <button class="show-answer" name="show-answer" type="submit">Submit</button>
+          <button class="show-answer" name="show-answer" type="submit" >Submit</button>
       </form>
       <!-- This will update on each view based on what the user selects throughout the quiz. -->
       <h4 class="score">${STORE.score} correct out of ${
@@ -159,7 +158,7 @@ function correctResponseTemplate(score) {
   let answers = STORE.questions[STORE.questionNumber].answers;
   let answersInput = answers.map(function (answer, index) {
     return `<input id="question-${index}" name="response" type="radio" 
-    value="${answer}" /> ${answer}</br>`;
+    value="${answer}" required/> ${answer}</br>`;
   });
 
   return `<section class="correct-screen">
@@ -169,7 +168,7 @@ function correctResponseTemplate(score) {
   </div>
   <div>
       
-      <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+      <form accept-charset="UTF-8" autocomplete="on">
           <label for="response-${STORE.questionNumber}">
               <h3>${question}</h3>
           </label>
@@ -191,7 +190,7 @@ function incorrectResponseTemplate(score) {
   let answers = STORE.questions[STORE.questionNumber].answers;
   let answersInput = answers.map(function (answer, index) {
     return `<input id="question-${index}" name="response" type="radio" 
-    value="${answer}" /> ${answer}</br>`;
+    value="${answer}" required /> ${answer}<br>`;
   });
   return `<section class="incorrect-screen">
   <h2 id="incorrect-repsonse-header " class="incorrect-repsonse-header">Uh oh! That's not right. And you call yourself a fan.</h2>
@@ -200,8 +199,7 @@ function incorrectResponseTemplate(score) {
            alt="Photograph of the singer/songwriter Frank Ocean singing into a microphone against a dark purple background">
   </div>
   <div>
-      <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
-          <form accept-charset="UTF-8" action="" autocomplete="off" method="" target="">
+      <form accept-charset="UTF-8" autocomplete="on">
           <label for="response-${STORE.questionNumber}">
               <h3>${question}</h3>
               <h3 id="feedback" class="feedback">The correct answer is: ${
@@ -285,7 +283,9 @@ function handleStartQuiz() {
 
 function handleShowAnswer() {
   // function needs to acess the value of the radio button they selected when the hit the submit button
-  $("main").on("click", ".show-answer", function (event) {
+
+  $("main").on("submit", ".question-form", function (event) {
+    debugger;
     event.preventDefault();
     let selected = $("input[type=radio]:checked").val();
 
@@ -334,7 +334,6 @@ function handleTryAgain() {
   $("main").on("click", ".try-again", function (event) {
     event.preventDefault();
     console.log("user clicked try again buton");
-    debugger;
     STORE.quizStarted = false;
     console.log(STORE.quizStarted);
     STORE.questionNumber = 0;

@@ -41,6 +41,7 @@ div .incorrect.selected-answer {
 button {
   margin-top: 20px;
   margin-bottom: 20px;
+  border-radius: 5px;
 }
 
 .start-quiz {
@@ -64,15 +65,33 @@ button {
 }
 
 h2.response-header {
-  color: lightgreen;
+  color: #57cc99;
 }
 
 h2.incorrect-repsonse-header {
   color: salmon;
 }
 
+.start-quiz:focus,
+.show-answer:focus,
+.try-again:focus,
+.next-question:focus {
+  border: 5px lightblue solid;
+}
+
+.start-quiz:hover,
+.show-answer:hover,
+.try-again:hover,
+.next-question:hover {
+  border: 5px lightblue solid;
+}
+
 .feedback {
   color: salmon;
+}
+
+input[type="radio"] {
+  margin-bottom: 20px;
 }
 
 @media screen and (min-width: 600px) {
